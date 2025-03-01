@@ -8,7 +8,7 @@ See the `sample_game.cpp` file for a basic example. The `Ice2D.h` header include
 All the resources I implemented inherit from `Ice2D::IBasicResource`, which will be automatically released by the ResourceManager object passed into the constructor. One of the simplest resources, which I will use as an example, is the `Ice2D::SolidBrush`. To construct just create the object and pass the resource manager and a color into the constructor. The resource manager is just called manager in the Application class or you can create a seperate one for things like multiple render targets. Then to use it in a Direct2D method, call the `Get()` method to get the underlying resource pointer. The brush will be automatically released when it leaves scope or when the application closes. This means the brush can be a static object, but I don't recomment this approach unless necessary.
 
 ## Ice2D::Application
-The contructor takes in the hInstance, width and height, a title, and some optional window style parameters. This class inherits from Ice2D::Graphics, which contains the windows and input stuff. It contains the main loop and also keeps track of the game time.
+The contructor takes in the hInstance, width and height, a title, and some optional window style parameters. This class inherits from `Ice2D::Graphics`, which contains the windows and input stuff. It contains the main loop and also keeps track of the game time.
 
 ## Ice2D::ResourceManager
 This contains a render target and all the necessary factories to create DirectX objects. It keeps track of all the resources made and releases them if necessary. All Ice2D applications need this class, as every resource takes a pointer to this object in its constructor.
