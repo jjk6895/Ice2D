@@ -283,10 +283,10 @@ namespace Ice2D
         hr = m_pLock->GetStride(&m_stride);
         CheckHR(hr);
 
-        unsigned expectedSize = m_stride * m_height;
+        unsigned int expectedSize = m_stride * m_height;
         if (m_bufferSize != expectedSize)
         {
-            throw std::runtime_error("Buffer size mismatch—unexpected memory layout");
+            throw std::runtime_error("Buffer size mismatchÂ—unexpected memory layout");
         }
     }
 
