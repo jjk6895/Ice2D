@@ -11,16 +11,10 @@ private:
 	D2D_POINT_2F pos, vel, size;
 	Ice2D::SolidBrush brush;
 	Ice2D::TextFormat font;
-	Ice2D::AnimationSheet mouse;
 	void Setup() override
 	{
 		brush = Ice2D::SolidBrush(&manager, D2D1::ColorF(1.0f));
 		font = Ice2D::TextFormat(&manager, L"Impact", 72.0f);
-		mouse = Ice2D::AnimationSheet(
-			&manager,
-			L"C:/Users/jkjt1/source/repos/Ice2D Dev/images/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Attack.png",
-			1, 4, 4, 20
-		);
 		font.Get()->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 		font.Get()->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 
@@ -50,25 +44,6 @@ private:
 		rt->FillRectangle(rect, brush.Get());
 		brush.SetColor(1.0f);
 		rt->DrawTextW(L"DVD", 4u, font.Get(), rect, brush.Get());
-
-		if (input.keyboardState[VK_SPACE] && !prevSpace)
-		{
-			mouse.PlayOnce();
-		}
-		prevSpace = input.keyboardState[VK_SPACE];
-
-		mouse.Advance();
-		rt->DrawBitmap(mouse.Get(), { 100.0f, 100.0f, 500.0f, 400.0f }, 1.0f,
-			D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, mouse.GetSourceRect());
-
-		Ice2D::ImageRenderTarget irt(&manager, 200, 200);
-		Ice2D::ResourceManager irtManager(irt.GetRT());
-		Ice2D::SolidBrush irtBrush(&irtManager, D2D1::ColorF(1.0f, 0.0f, 1.0f));
-		irt.GetRT()->BeginDraw();
-		irt.GetRT()->Clear(D2D1::ColorF(0.0f, 1.0f, 0.0f));
-		irt.GetRT()->FillRectangle(D2D1::RectF(50.0f, 50.0f, 150.0f, 150.0f), irtBrush.Get());
-		irt.GetRT()->EndDraw();
-		rt->DrawBitmap(irt.GetBitmap(), { 300.0f, 300.0f, 500.0f, 500.0f });
 
 		return rt->EndDraw();
 	}
